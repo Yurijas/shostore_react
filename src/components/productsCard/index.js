@@ -14,7 +14,7 @@ class ProductsCard extends Component {
                   <div className="card-title">{item.name}</div>
                   <div className="card-subtitle">${item.price}</div>
                   <div className="card-text">{item.desc}</div>
-                  <button className="btn btn-success" onClick="">Add to Cart</button>
+                  <button className="btn btn-success" onClick={() => this.props.addItem(item.id)}>Add to Cart</button>
                   </div>
                 </div>
               )
