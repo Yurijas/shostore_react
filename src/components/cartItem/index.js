@@ -7,6 +7,7 @@ class CartItem extends Component {
   render() {
     return (
       <tr>
+        <td>{this.props.countDuplicates(this.props.item.id)}</td>
         <td>{this.props.item.name}</td>
         <td>{this.props.item.price}</td>
         <td>

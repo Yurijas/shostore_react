@@ -8,7 +8,8 @@ class Checkout extends Component {
       <div className="row">
         <div className="col-md-12">
           <CartTable cart={this.props.cart}
-          removeItem={this.props.removeItem} />
+          removeItem={this.props.removeItem}
+          total={this.props.total} countDuplicates={this.props.countDuplicates} />
         </div>
       </div>
     );

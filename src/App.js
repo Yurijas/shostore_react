@@ -11,7 +11,8 @@ class App extends Component {
     super();
     this.state = {
       'products': [],
-      'cart': []
+      'cart': [],
+      'total': 0
     }
   }
 
@@ -28,6 +29,7 @@ class App extends Component {
       }
     }
     this.setState({'cart': cart});
+    this.calcTotal();
     console.log(this.state.cart);
   }
 
@@ -40,6 +42,7 @@ class App extends Component {
         break;
       }
     }
+    this.calcTotal();
     this.setState({'cart': cart});
     console.log(this.state.cart);
   }
@@ -50,11 +53,22 @@ class App extends Component {
     for (let i in cart) {
       total += cart[i].price;
     }
-    return total.toFixed(2);
+    this.setState({ total: total.toFixed(2) });
   }
 
   updateTotals = () => {
     let total = this.calcTotal();
+  }
+
+  countDuplicates = id => {
+    let cart = this.state.cart;
+    let count = 0;
+    for (let i in cart) {
+      if (cart[i].id == id) {
+        count += 1
+      }
+    }
+    return count;
   }
 
   render() {
@@ -64,7 +78,7 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route exact path='/' render={() => <Shop products={this.state.products} addItem={this.addItem} />} />
-            <Route exact path='/checkout' render={() => <Checkout cart={this.state.cart} removeItem={this.removeItem}  calcTotal={this.calcTotal} updateTotals={this.updateTotals} />} />
+            <Route exact path='/checkout' render={() => <Checkout cart={this.state.cart} removeItem={this.removeItem}  total={this.state.total} countDuplicates={this.countDuplicates}/>} />
           </Switch>
         </div>
       </div>
