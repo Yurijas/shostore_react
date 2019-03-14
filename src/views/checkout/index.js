@@ -5,9 +5,11 @@ import CartTable from '../../components/cartTable';
 class Checkout extends Component {
   render() {
     return (
-      <div className="countainer">
-        <h1>This is the checkout page.</h1>
-        <CartTable />
+      <div className="row">
+        <div className="col-md-12">
+          <CartTable cart={this.props.cart}
+          removeItem={this.props.removeItem} />
+        </div>
       </div>
     );
   }

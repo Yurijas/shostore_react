@@ -28,6 +28,33 @@ class App extends Component {
       }
     }
     this.setState({'cart': cart});
+    console.log(this.state.cart);
+  }
+
+
+  removeItem = id => {
+    let cart = this.state.cart;
+    for (let i in cart) {
+      if (cart[i].id == id) {
+        cart.splice(i, 1);
+        break;
+      }
+    }
+    this.setState({'cart': cart});
+    console.log(this.state.cart);
+  }
+
+  calcTotal = () => {
+    let cart = this.state.cart;
+    let total = 0;
+    for (let i in cart) {
+      total += cart[i].price;
+    }
+    return total.toFixed(2);
+  }
+
+  updateTotals = () => {
+    let total = this.calcTotal();
   }
 
   render() {
@@ -36,8 +63,8 @@ class App extends Component {
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path='/' render={() => <Shop products={this.state.products} />} />
-            <Route exact path='/checkout' render={() => <Checkout />} />
+            <Route exact path='/' render={() => <Shop products={this.state.products} addItem={this.addItem} />} />
+            <Route exact path='/checkout' render={() => <Checkout cart={this.state.cart} removeItem={this.removeItem}  calcTotal={this.calcTotal} updateTotals={this.updateTotals} />} />
           </Switch>
         </div>
       </div>

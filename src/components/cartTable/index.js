@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
+import CartItem from '../../components/cartItem';
 
 class CartTable extends Component {
   render() {
@@ -13,11 +14,12 @@ class CartTable extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>placeholder1</td>
-            <td>placeholder2</td>
-            <td>placeholder3</td>
-          </tr>
+        {
+          this.props.cart &&
+            this.props.cart.map( item =>
+              <CartItem item={item} key={item.id} removeItem={this.props.removeItem}/>
+          )
+        }
         </tbody>
       </table>
     );
